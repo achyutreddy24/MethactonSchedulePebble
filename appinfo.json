@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "achyutreddy24@gmail.com",
+    "longName": "MethactonSchedule",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "shortName": "MethactonSchedule",
+    "uuid": "4c3db5f7-1ba1-4938-a7b3-71d05c7b9e10",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
