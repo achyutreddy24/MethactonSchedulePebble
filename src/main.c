@@ -91,6 +91,11 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 }
   
 static void init() {
+	if (persist_exists(PERSIST_INT)) {
+    // Load stored count
+    letter_int = persist_read_int(PERSIST_INT);
+  }
+	
   // Create main Window element and assign to pointer
   s_main_window = window_create();
 
