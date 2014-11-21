@@ -7,7 +7,7 @@ static TextLayer *s_letter_layer;
 char *current_letter = "Y";
 int letter_int = 1;
 
-static void num_to_letter() {
+static void update_day() {
 	if (letter_int == 1) {
 		current_letter = "A";
 	}
@@ -29,6 +29,7 @@ static void num_to_letter() {
 	else {
 		current_letter = "ERR";
 	}
+	text_layer_set_text(s_letter_layer, current_letter);
 }
 
 static void update_time() {
@@ -91,7 +92,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 }
 
 static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
-  num_to_letter();
+  update_day();
 }
   
 static void init() {
