@@ -78,7 +78,6 @@ static void main_window_load(Window *window) {
   
   // Make sure the time is displayed from the start
   update_time();
-	update_day();
 }
 
 static void main_window_unload(Window *window) {
@@ -101,6 +100,7 @@ static void init() {
     // Load stored count
     letter_int = persist_read_int(PERSIST_INT);
   }
+	update_day();
 	
   // Create main Window element and assign to pointer
   s_main_window = window_create();
