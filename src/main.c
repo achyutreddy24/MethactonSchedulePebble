@@ -89,6 +89,10 @@ static void main_window_unload(Window *window) {
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   update_time();
 }
+
+static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
+  num_to_letter();
+}
   
 static void init() {
 	if (persist_exists(PERSIST_INT)) {
@@ -110,6 +114,7 @@ static void init() {
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+	tick_timer_service_subscribe(DAY_UNIT, tick_handler_days);
 }
 
 static void deinit() {
