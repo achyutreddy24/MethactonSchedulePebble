@@ -7,24 +7,31 @@ static TextLayer *s_letter_layer;
 char *current_letter = "Y";
 int letter_int = 1;
 
+
 static void update_day() {
-	if (letter_int == 1) {
+	if (letter_int == 1 && strcmp(current_letter, "A") != 0) {
 		current_letter = "A";
+		//letter_int++;
 	}
-	else if (letter_int == 2) {
+	else if (letter_int == 2 && strcmp(current_letter, "B") != 0) {
 		current_letter = "B";
+		//letter_int++;
 	}
-	else if (letter_int == 3) {
+	else if (letter_int == 3 && strcmp(current_letter, "C") != 0) {
 		current_letter = "C";
+		//letter_int++;
 	}
-	else if (letter_int == 4) {
+	else if (letter_int == 4 && strcmp(current_letter, "D") != 0) {
 		current_letter = "D";
+		//letter_int++;
 	}
-	else if (letter_int == 5) {
+	else if (letter_int == 5 && strcmp(current_letter, "E") != 0) {
 		current_letter = "E";
+		//letter_int++;
 	}
-	else if (letter_int == 6) {
+	else if (letter_int == 6 && strcmp(current_letter, "F") != 0) {
 		current_letter = "F";
+		//letter_int = 1;
 	}
 	else {
 		current_letter = "ERR";
@@ -64,6 +71,7 @@ static void main_window_load(Window *window) {
 	s_letter_layer = text_layer_create(GRect(0, 5, 144, 30));
 	text_layer_set_background_color(s_letter_layer, GColorClear);
   text_layer_set_text_color(s_letter_layer, GColorBlack);
+	text_layer_set_text(s_letter_layer, "TEST");
 
   // Improve the layout to be more like a watchface
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
@@ -92,7 +100,14 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 
 static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
   update_day();
-	letter_int++;
+	
+	
+	//Checking if its a new day
+	static char day_check[] = "01";
+	strftime(day_check, sizeof("01"), "%H", tick_time);
+	if (strcmp(day_check, "00") == 0) {
+		letter_int++;
+	}
 }
   
 static void init() {
@@ -100,7 +115,6 @@ static void init() {
     // Load stored count
     letter_int = persist_read_int(PERSIST_INT);
   }
-	update_day();
 	
   // Create main Window element and assign to pointer
   s_main_window = window_create();
@@ -117,6 +131,7 @@ static void init() {
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
 	tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_days);
+	
 }
 
 static void deinit() {
