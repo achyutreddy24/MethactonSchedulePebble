@@ -9,27 +9,27 @@ int letter_int = 1;
 
 
 static void update_day() {
-	if (letter_int == 1 && strcmp(current_letter, "A") != 0) {
+	if (letter_int == 1) {
 		current_letter = "A";
 		//letter_int++;
 	}
-	else if (letter_int == 2 && strcmp(current_letter, "B") != 0) {
+	else if (letter_int == 2) {
 		current_letter = "B";
 		//letter_int++;
 	}
-	else if (letter_int == 3 && strcmp(current_letter, "C") != 0) {
+	else if (letter_int == 3) {
 		current_letter = "C";
 		//letter_int++;
 	}
-	else if (letter_int == 4 && strcmp(current_letter, "D") != 0) {
+	else if (letter_int == 4) {
 		current_letter = "D";
 		//letter_int++;
 	}
-	else if (letter_int == 5 && strcmp(current_letter, "E") != 0) {
+	else if (letter_int == 5) {
 		current_letter = "E";
 		//letter_int++;
 	}
-	else if (letter_int == 6 && strcmp(current_letter, "F") != 0) {
+	else if (letter_int == 6) {
 		current_letter = "F";
 		//letter_int = 1;
 	}
