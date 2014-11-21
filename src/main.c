@@ -1,8 +1,35 @@
 #include <pebble.h>
-  
+#define PERSIST_INT 1
+	
 static Window *s_main_window;
 static TextLayer *s_time_layer;
 static TextLayer *s_letter_layer;
+char *current_letter = "Y";
+int letter_int = 1;
+
+static void num_to_letter() {
+	if (letter_int == 1) {
+		current_letter = "A";
+	}
+	if (letter_int == 2) {
+		current_letter = "B";
+	}
+	if (letter_int == 3) {
+		current_letter = "C";
+	}
+	if (letter_int == 4) {
+		current_letter = "D";
+	}
+	if (letter_int == 5) {
+		current_letter = "E";
+	}
+	if (letter_int == 6) {
+		current_letter = "F";
+	}
+	else {
+		current_letter = "ERR";
+	}
+}
 
 static void update_time() {
   // Get a tm structure
@@ -11,6 +38,7 @@ static void update_time() {
 
   // Create a long-lived buffer
   static char buffer[] = "00:00";
+	static char letter_buffer[] = "X";
 
   // Write the current hours and minutes into the buffer
   if(clock_is_24h_style() == true) {
@@ -35,7 +63,7 @@ static void main_window_load(Window *window) {
 	s_letter_layer = text_layer_create(GRect(0, 5, 144, 30));
 	text_layer_set_background_color(s_letter_layer, GColorClear);
   text_layer_set_text_color(s_letter_layer, GColorBlack);
-  text_layer_set_text(s_letter_layer, "Z");
+  text_layer_set_text(s_letter_layer, "V");
 
   // Improve the layout to be more like a watchface
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
@@ -82,6 +110,7 @@ static void init() {
 static void deinit() {
   // Destroy Window
   window_destroy(s_main_window);
+	persist_write_int(PERSIST_INT, letter_int);
 }
 
 int main(void) {
