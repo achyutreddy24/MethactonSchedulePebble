@@ -11,19 +11,19 @@ static void update_day() {
 	if (letter_int == 1) {
 		current_letter = "A";
 	}
-	if (letter_int == 2) {
+	else if (letter_int == 2) {
 		current_letter = "B";
 	}
-	if (letter_int == 3) {
+	else if (letter_int == 3) {
 		current_letter = "C";
 	}
-	if (letter_int == 4) {
+	else if (letter_int == 4) {
 		current_letter = "D";
 	}
-	if (letter_int == 5) {
+	else if (letter_int == 5) {
 		current_letter = "E";
 	}
-	if (letter_int == 6) {
+	else if (letter_int == 6) {
 		current_letter = "F";
 	}
 	else {
@@ -39,7 +39,7 @@ static void update_time() {
 
   // Create a long-lived buffer
   static char buffer[] = "00:00";
-	static char letter_buffer[] = "X";
+	//static char letter_buffer[] = "X";
 
   // Write the current hours and minutes into the buffer
   if(clock_is_24h_style() == true) {
@@ -64,7 +64,6 @@ static void main_window_load(Window *window) {
 	s_letter_layer = text_layer_create(GRect(0, 5, 144, 30));
 	text_layer_set_background_color(s_letter_layer, GColorClear);
   text_layer_set_text_color(s_letter_layer, GColorBlack);
-  text_layer_set_text(s_letter_layer, "V");
 
   // Improve the layout to be more like a watchface
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
@@ -79,6 +78,7 @@ static void main_window_load(Window *window) {
   
   // Make sure the time is displayed from the start
   update_time();
+	update_day();
 }
 
 static void main_window_unload(Window *window) {
