@@ -116,7 +116,7 @@ static void init() {
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-	tick_timer_service_subscribe(DAY_UNIT, tick_handler_days);
+	tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_days);
 }
 
 static void deinit() {
