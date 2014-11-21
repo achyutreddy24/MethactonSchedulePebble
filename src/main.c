@@ -93,6 +93,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 
 static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
   update_day();
+	letter_int++;
 }
   
 static void init() {
