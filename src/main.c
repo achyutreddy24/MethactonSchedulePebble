@@ -95,9 +95,19 @@ static void main_window_unload(Window *window) {
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
-  update_time();
+	//Checking if its a new day
+	static char day_check[] = "01";
+	strftime(day_check, sizeof("01"), "%H", tick_time);
+	if (strcmp(day_check, "00") == 0) {
+		letter_int++;
+	}
+	update_time();
+	update_day();
+
+	
 }
 
+/*
 static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
   update_day();
 	
@@ -110,6 +120,7 @@ static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
 	}
 }
   
+	*/
 static void init() {
 	if (persist_exists(PERSIST_INT)) {
     // Load stored count
@@ -130,7 +141,16 @@ static void init() {
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-	tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_days);
+	//tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_days);
+	
+	//Checking if its a new day
+	static char day_check[] = "01";
+	strftime(day_check, sizeof("01"), "%H", tick_time);
+	if (strcmp(day_check, "00") == 0) {
+		letter_int++;
+	}
+	update_time();
+	update_day();
 	
 }
 
