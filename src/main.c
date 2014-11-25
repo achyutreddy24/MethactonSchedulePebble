@@ -5,7 +5,7 @@ static Window *s_main_window;
 static TextLayer *s_time_layer;
 static TextLayer *s_letter_layer;
 char *current_letter = "Y";
-int letter_int = 1;
+int letter_int = 2;
 
 
 static void update_day() {
@@ -122,6 +122,10 @@ static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
   
 	*/
 static void init() {
+	// Get a tm structure
+  time_t temp = time(NULL); 
+  struct tm *tick_time = localtime(&temp);
+	
 	if (persist_exists(PERSIST_INT)) {
     // Load stored count
     letter_int = persist_read_int(PERSIST_INT);
@@ -145,7 +149,7 @@ static void init() {
 	
 	//Checking if its a new day
 	static char day_check[] = "01";
-	strftime(day_check, sizeof("01"), "%H", tick_time);
+	strftime(day_check, sizeof("01"), "%M", tick_time);
 	if (strcmp(day_check, "00") == 0) {
 		letter_int++;
 	}
