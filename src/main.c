@@ -10,6 +10,16 @@ int letter_int = 2;
 
 
 static void update_day() {
+	//Checking if its a new day
+	// Get a tm structure
+  time_t temp = time(NULL); 
+  struct tm *tick_time = localtime(&temp);
+	static char day_check[] = "01";
+	strftime(day_check, sizeof("01"), "%M", tick_time);
+	if (strcmp(day_check, "00") == 0) {
+		letter_int++;
+	}
+	
 	if (letter_int == 1) {
 		current_letter = "A";
 		//letter_int++;
@@ -96,12 +106,6 @@ static void main_window_unload(Window *window) {
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
-	//Checking if its a new day
-	static char day_check[] = "01";
-	strftime(day_check, sizeof("01"), "%H", tick_time);
-	if (strcmp(day_check, "00") == 0) {
-		letter_int++;
-	}
 	update_time();
 	update_day();
 
@@ -196,7 +200,6 @@ static void init() {
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-	//tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_days);
 	
 	//Checking if its a new day
 	static char day_check[] = "01";

@@ -7,7 +7,7 @@ Pebble.addEventListener("ready",
 Pebble.addEventListener("showConfiguration",
   function(e) {
     //Load the remote config page
-    Pebble.openURL("http://methactonletterday.host56.com/");
+    Pebble.openURL("https://2050b8c314c170d20a605bf80914e37fb2f6077e-www.googledrive.com/host/0B_Gb7j81N-HKWUtaMzdBenZITG8"); //This link works too but has advertisements ("http://methactonletterday.host56.com/");
   }
 );
 
