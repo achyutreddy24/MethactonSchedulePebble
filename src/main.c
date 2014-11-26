@@ -1,5 +1,6 @@
 #include <pebble.h>
 #define PERSIST_INT 1
+#define LETTER_DAY 0
 	
 static Window *s_main_window;
 static TextLayer *s_time_layer;
@@ -121,7 +122,57 @@ static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
 }
   
 	*/
+
+static void in_recv_handler(DictionaryIterator *iterator, void *context)
+{
+  //Get Tuple
+  Tuple *t = dict_read_first(iterator);
+  if(t)
+  {
+    switch(t->key)
+    {
+    case LETTER_DAY:
+      //It's the key
+      if(strcmp(t->value->cstring, "A") == 0)
+      {
+				letter_int = 1;
+        persist_write_int(PERSIST_INT, letter_int);
+      }
+      else if(strcmp(t->value->cstring, "B") == 0)
+      {
+        letter_int = 2;
+        persist_write_int(PERSIST_INT, letter_int);
+      }
+			else if(strcmp(t->value->cstring, "C") == 0)
+      {
+        letter_int = 3;
+        persist_write_int(PERSIST_INT, letter_int);
+      }
+			else if(strcmp(t->value->cstring, "D") == 0)
+      {
+        letter_int = 4;
+        persist_write_int(PERSIST_INT, letter_int);
+      }
+			else if(strcmp(t->value->cstring, "E") == 0)
+      {
+        letter_int = 5;
+        persist_write_int(PERSIST_INT, letter_int);
+      }
+			else if(strcmp(t->value->cstring, "F") == 0)
+      {
+        letter_int = 6;
+        persist_write_int(PERSIST_INT, letter_int);
+      }
+			update_day();
+      break;
+    }
+  }
+}
+
 static void init() {
+	app_message_register_inbox_received((AppMessageInboxReceived) in_recv_handler);
+	app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
+	
 	// Get a tm structure
   time_t temp = time(NULL); 
   struct tm *tick_time = localtime(&temp);

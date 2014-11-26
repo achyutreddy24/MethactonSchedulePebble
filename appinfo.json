@@ -1,7 +1,9 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "LETTER_DAY": 0
+    },
     "capabilities": [
-        ""
+        "configurable"
     ],
     "companyName": "achyutreddy24@gmail.com",
     "longName": "MethactonSchedule",
