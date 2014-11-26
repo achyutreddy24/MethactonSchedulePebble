@@ -15,7 +15,7 @@ static void update_day() {
   time_t temp = time(NULL); 
   struct tm *tick_time = localtime(&temp);
 	static char day_check[] = "01";
-	strftime(day_check, sizeof("01"), "%M", tick_time);
+	strftime(day_check, sizeof("01"), "%H", tick_time);
 	if (strcmp(day_check, "00") == 0) {
 		letter_int++;
 	}
@@ -200,13 +200,7 @@ static void init() {
   
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-	
-	//Checking if its a new day
-	static char day_check[] = "01";
-	strftime(day_check, sizeof("01"), "%M", tick_time);
-	if (strcmp(day_check, "00") == 0) {
-		letter_int++;
-	}
+
 	update_time();
 	update_day();
 	
