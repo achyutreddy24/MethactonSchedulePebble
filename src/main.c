@@ -22,13 +22,16 @@ static void update_day() {
 		static char day_check[] = "01";
 		strftime(day_check, sizeof("01"), "%H", tick_time);
 		if (strcmp(day_check, "00") == 0) {
-			if (letter_int == 6) {
+			static char minute_check[] = "01";
+		  strftime(minute_check, sizeof("01"), "%M", tick_time);
+			if (strcmp(minute_check, "00") == 0) {
+				if (letter_int == 6) {
 				letter_int = 1;
 			}
-			else {
+			  else {
 				letter_int++;
+			  }
 			}
-		
 	  }
 	}
 	
@@ -223,7 +226,7 @@ static void init() {
   window_stack_push(s_main_window, true);
   
   // Register with TickTimerService
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
 
 	update_time();
 	update_day();
