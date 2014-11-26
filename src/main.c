@@ -25,18 +25,20 @@ static void update_day() {
 			static char minute_check[] = "01";
 		  strftime(minute_check, sizeof("01"), "%M", tick_time);
 			if (strcmp(minute_check, "00") == 0) {
-				if (letter_int == 6) {
-				letter_int = 1;
-			}
-			  else {
-				letter_int++;
-			  }
+				static char second_check[] = "01";
+		    strftime(second_check, sizeof("01"), "%S", tick_time);
+			  if (strcmp(minute_check, "00") == 0) {
+					if (letter_int == 6) {
+				    letter_int = 1;
+			    }
+			    else {
+				    letter_int++;
+			    }	
+				}
 			}
 	  }
 	}
-	
-	
-	
+
 	if (letter_int == 1) {
 		current_letter = "A";
 		//letter_int++;
@@ -139,21 +141,6 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 	
 }
 
-/*
-static void tick_handler_days(struct tm *tick_time, TimeUnits units_changed) {
-  update_day();
-	
-	
-	//Checking if its a new day
-	static char day_check[] = "01";
-	strftime(day_check, sizeof("01"), "%H", tick_time);
-	if (strcmp(day_check, "00") == 0) {
-		letter_int++;
-	}
-}
-  
-	*/
-
 static void in_recv_handler(DictionaryIterator *iterator, void *context)
 {
   //Get Tuple
@@ -203,10 +190,7 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
 static void init() {
 	app_message_register_inbox_received((AppMessageInboxReceived) in_recv_handler);
 	app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
-	
-	// Get a tm structure
-  time_t temp = time(NULL); 
-  struct tm *tick_time = localtime(&temp);
+
 	
 	if (persist_exists(PERSIST_INT)) {
     // Load stored count
